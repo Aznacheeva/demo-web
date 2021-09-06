@@ -4,17 +4,24 @@ import com.example.demoweb.model.Post;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
 public class PostService {
-    public List<Post> listAllPosts() {
-        List<Post> result = new ArrayList<>();
-        result.add(new Post("ПРЕВЕД МЕДВЕД"));
-        result.add(new Post("третье сентября.... день прощанья"));
-        result.add(new Post("сентябрь гарит..."));
+    List<Post> posts = new ArrayList<>();
 
-        return result;
+    {
+        posts.add(new Post("ПРЕВЕД МЕДВЕД", new Date()));
+        posts.add(new Post("третье сентября.... день прощанья", new Date()));
+        posts.add(new Post("сентябрь гарит...", new Date()));
     }
 
+    public List<Post> listAllPosts() {
+        return posts;
+    }
+
+    public void create(String text) {
+        posts.add(new Post(text, new Date()));
+    }
 }
