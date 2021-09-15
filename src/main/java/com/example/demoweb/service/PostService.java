@@ -9,19 +9,16 @@ import java.util.List;
 
 @Service
 public class PostService {
-    List<Post> posts = new ArrayList<>();
+    @Autowired
+    PostRepository postRepository;
 
-    {
-        posts.add(new Post(0L,"ПРЕВЕД МЕДВЕД", new Date()));
-        posts.add(new Post(1L,"третье сентября.... день прощанья", new Date()));
-        posts.add(new Post(2L,"сентябрь гарит...", new Date()));
-    }
-
-    public List<Post> listAllPosts() {
-        return posts;
+    public Iterable<Post> listAllPosts() {
+        return postRepository.findAll();
     }
 
     public void create(String text) {
-        posts.add(new Post((long) (posts.size() + 1), text, new Date()));
+        Post post = new Post(null, text, new Date());
+        postRepository.save(post);
+        
     }
 }

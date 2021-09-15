@@ -13,17 +13,14 @@ public class PostsCreateController {
     @Autowired
     PostService postsService;
 
-    //при запуске выдает There was an unexpected error (type=Not Found, status=404)
     @RequestMapping(path = "/new", method = RequestMethod.GET)
     public String create(Model model, @ModelAttribute("text") String text) {
         model.addAttribute("appName", "Моё супер приложение");
         return "create";
     }
 
-    //при запуске выдает There was an unexpected error (type=Not Found, status=404)
     @RequestMapping(path = "/new", method = RequestMethod.POST)
-    public String doCreate(Model model, @ModelAttribute("text") String text) {
-        model.addAttribute("appName", "Моё супер приложение");
+    public String doCreate(@ModelAttribute("text") String text) {
         postsService.create(text);
         return "redirect:/";
 
